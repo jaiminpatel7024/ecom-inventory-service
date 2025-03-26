@@ -1,14 +1,14 @@
-package com.jp.productcatalogservice;
+package com.jp.inventoryservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProductCatalogServiceApplication {
+public class InventoryServiceApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(ProductCatalogServiceApplication.class, args);
+        SpringApplication.run(InventoryServiceApplication.class, args);
 
     }
 
