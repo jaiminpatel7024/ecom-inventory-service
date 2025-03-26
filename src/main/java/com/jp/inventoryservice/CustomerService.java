@@ -43,7 +43,7 @@ public class CustomerService
 
         } catch (WebClientResponseException e) {
             if (e.getStatusCode().value() == 401) {
-                System.out.println("Unauthorized request. Handle accordingly.");
+                log.info("Unauthorized request.");
                 return false; // Or throw a custom exception
             }
             throw e; // Re-throw other exceptions

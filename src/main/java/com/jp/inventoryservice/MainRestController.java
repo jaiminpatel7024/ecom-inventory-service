@@ -34,7 +34,7 @@ public class MainRestController {
             inventoryRepo.save(inventory);
             return ResponseEntity.ok("New Product Inventory Added.");
         } else {
-            return ResponseEntity.status(401).build();
+            return ResponseEntity.status(401).body("Unauthorized");
         }
     }
 
@@ -51,7 +51,7 @@ public class MainRestController {
                 return  ResponseEntity.ok("No inventory found with given id : "+productId);
             }
         } else {
-            return ResponseEntity.status(401).build();
+            return ResponseEntity.status(401).body("Unauthorized");
         }
     }
 
@@ -72,7 +72,7 @@ public class MainRestController {
             return ResponseEntity.ok("Inventory quantities blocked as requested for : "+inventoryParam);
 
         } else {
-            return ResponseEntity.status(401).build();
+            return ResponseEntity.status(401).body("Unauthorized");
         }
     }
 
@@ -89,7 +89,7 @@ public class MainRestController {
             return ResponseEntity.ok("Inventory quantities released as requested for : "+inventoryParam);
 
         } else {
-            return ResponseEntity.status(401).build();
+            return ResponseEntity.status(401).body("Unauthorized");
         }
     }
 
@@ -106,7 +106,7 @@ public class MainRestController {
                 return  ResponseEntity.ok("No product inventory found with given id : "+productId);
             }
         } else {
-            return ResponseEntity.status(401).build();
+            return ResponseEntity.status(401).body("Unauthorized");
         }
     }
 
