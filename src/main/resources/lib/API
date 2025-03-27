@@ -1,0 +1,23 @@
+POST localhost:8203/api/v1/inventory/add
+{
+	"productId": "1",
+	"quantities": "50"
+}
+---
+POST localhost:8203/api/v1/inventory/block
+{
+	"productId": "1",
+	"quantities": "5"
+}
+---
+POST localhost:8203/api/v1/inventory/release
+{
+	"productId": "1",
+	"quantities": "5"
+}
+---
+GET localhost:8203/api/v1/inventory/view/1
+---
+GET localhost:8203/api/v1/inventory/viewAll
+---
+POST localhost:8203/api/v1/inventory/delete/1
