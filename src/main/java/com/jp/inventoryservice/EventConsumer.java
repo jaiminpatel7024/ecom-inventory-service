@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 @Service
-public class Consumer
+public class EventConsumer
 {
-    private final Logger logger = LoggerFactory.getLogger(Consumer.class);
+    private final Logger logger = LoggerFactory.getLogger(EventConsumer.class);
 
     @Autowired
     InventoryRepository inventoryRepo;
@@ -21,7 +21,7 @@ public class Consumer
     {
         //analytics_counter.increment();
         ObjectMapper mapper  = new ObjectMapper();
-        ProductData datum =  mapper.readValue(message, ProductData.class);
+        ProductEvent datum =  mapper.readValue(message, ProductEvent.class);
 
         logger.info(String.format("#### -> Consumed message -> %s", message));
 
