@@ -32,8 +32,10 @@ public class MainRestController {
 
         if(customerService.validateToken(token)){
             inventoryRepo.save(inventory);
+            log.info("Added product inventory : {}", inventory);
             return ResponseEntity.ok("New Product Inventory Added.");
         } else {
+            log.info("Invalid authentication token to add inventory : {}", inventory);
             return ResponseEntity.status(401).body("Unauthorized");
         }
     }
@@ -46,11 +48,14 @@ public class MainRestController {
             Optional<Inventory> inventoryObj = inventoryRepo.findById(productId);
 
             if(inventoryObj.isPresent()){
+                log.info("Found product inventory with product id : {} ",productId);
                 return ResponseEntity.ok(inventoryObj);
             }else{
+                log.info("No product inventory found with product id : {} ",productId);
                 return  ResponseEntity.ok("No inventory found with given id : "+productId);
             }
         } else {
+            log.info("Invalid authentication token to view inventory with product id : {}", productId);
             return ResponseEntity.status(401).body("Unauthorized");
         }
     }
@@ -63,15 +68,18 @@ public class MainRestController {
             Inventory inventoryObj = inventoryRepo.findById(inventoryParam.getProductId()).get();
 
             if(inventoryObj.getQuantities() < inventoryParam.getQuantities()){
+                log.info("Insufficient inventory available for data : {} ",inventoryParam);
                 return ResponseEntity.ok("Insufficient Quantities");
             }
 
             int remaining = inventoryObj.getQuantities() - inventoryParam.getQuantities();
             inventoryObj.setQuantities(remaining);
             inventoryRepo.save(inventoryObj);
+            log.info("Inventory available and blocked for data : {} ",inventoryParam);
             return ResponseEntity.ok("Inventory quantities blocked as requested for : "+inventoryParam);
 
         } else {
+            log.info("Invalid authentication token to block inventory : {}", inventoryParam);
             return ResponseEntity.status(401).body("Unauthorized");
         }
     }
@@ -83,12 +91,15 @@ public class MainRestController {
         if(customerService.validateToken(token)){
             Inventory inventoryObj = inventoryRepo.findById(inventoryParam.getProductId()).get();
 
+            log.info("Found inventory with data : {} ",inventoryObj);
             int total = inventoryObj.getQuantities() + inventoryParam.getQuantities();
             inventoryObj.setQuantities(total);
             inventoryRepo.save(inventoryObj);
+            log.info("Release inventory with data : {} ",inventoryObj);
             return ResponseEntity.ok("Inventory quantities released as requested for : "+inventoryParam);
 
         } else {
+            log.info("Invalid authentication token to release inventory : {}", inventoryParam);
             return ResponseEntity.status(401).body("Unauthorized");
         }
     }
@@ -101,11 +112,14 @@ public class MainRestController {
             Optional<Inventory> inventoryObj = inventoryRepo.findById(productId);
             if(inventoryObj.isPresent()){
                 inventoryRepo.deleteById(productId);
+                log.info("Deleted delete product inventory with product id : {} ",productId);
                 return ResponseEntity.ok("Product Inventory data deleted successfully.");
             }else{
+                log.info("Not found inventory with product id : {} ",productId);
                 return  ResponseEntity.ok("No product inventory found with given id : "+productId);
             }
         } else {
+            log.info("Invalid authentication token to delete inventory with productID : {}", productId);
             return ResponseEntity.status(401).body("Unauthorized");
         }
     }

@@ -23,10 +23,6 @@ public class CustomerService
 
         log.info("Validating token within the CustomerService: {}", token);
         log.info("Sending request to customer service to validate token: {}", token);
-        /*String response = webClient.get().uri("/validate")
-                .header("Authorization", token)
-                .retrieve()
-                .bodyToMono(String.class).block(); // Current Thread will pause till the final response comes back*/
 
         try {
             String response = webClient.get()
